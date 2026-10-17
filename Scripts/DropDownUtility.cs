@@ -7,25 +7,30 @@ using TMPro;
 
 
 namespace UISelectable {
-[RequireComponent(typeof(TMP_Dropdown))]
-public class DropDownUtility : SelectableUtility<DropdownSettings, TMP_Dropdown> {
+    [RequireComponent(typeof(TMP_Dropdown))]
+    public class DropDownUtility : SelectableUtility<DropdownSettings, TMP_Dropdown> {
         Tween _dropdownColorTween;
         ColorBlock _dropdownDefaultColors;
         Coroutine _watchRoutine;
 
         protected override void Awake() {
             base.Awake();
+            if (!_isValid) { return; }
+
             _dropdownDefaultColors = _selectable.colors;
         }
 
         protected override void OnEnable() {
             base.OnEnable();
+            if (!_isValid) { return; }
 
             _watchRoutine = StartCoroutine(WatchDropdownState());
         }
 
         protected override void OnDisable() {
             base.OnDisable();
+            if (!_isValid) { return; }
+
             if (_watchRoutine != null) {
                 StopCoroutine(_watchRoutine);
                 _watchRoutine = null;
@@ -37,6 +42,8 @@ public class DropDownUtility : SelectableUtility<DropdownSettings, TMP_Dropdown>
 
         protected override void OnDestroy() {
             base.OnDestroy();
+            if (!_isValid) { return; }
+
             KillColorTween();
         }
 
@@ -44,6 +51,8 @@ public class DropDownUtility : SelectableUtility<DropdownSettings, TMP_Dropdown>
         #region Pointer Events
 
         public override void OnPointerEnter(PointerEventData eventData) {
+            if (!_isValid) { return; }
+
             if (_selectable.IsExpanded) { return; }
             base.OnPointerEnter(eventData);
         }
@@ -53,11 +62,15 @@ public class DropDownUtility : SelectableUtility<DropdownSettings, TMP_Dropdown>
         #region Select Events
 
         public override void OnDeselect(BaseEventData eventData) {
+            if (!_isValid) { return; }
+
             if (_selectable.IsExpanded) { return; }
             base.OnDeselect(eventData);
         }
 
         #endregion
+
+        #region Dropdown
 
         protected IEnumerator WatchDropdownState() {
             yield return null;
@@ -83,6 +96,10 @@ public class DropDownUtility : SelectableUtility<DropdownSettings, TMP_Dropdown>
 
         }
 
+        #endregion
+
+        #region Tweening
+
         void TweenDropDownColor(Color targetColor) {
             KillColorTween();
 
@@ -101,5 +118,7 @@ public class DropDownUtility : SelectableUtility<DropdownSettings, TMP_Dropdown>
             _dropdownColorTween?.Kill();
             _dropdownColorTween = null;
         }
+
+        #endregion
     }
 }
