@@ -3,8 +3,9 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-public class RadioGroupTester : MonoBehaviour
-{
+
+namespace UISelectable.Testing {
+public class RadioGroupTester : MonoBehaviour {
     [SerializeField] List<RadioButtonUtility> _buttons = new();
 
     int _index;
@@ -35,4 +36,5 @@ public class RadioGroupTester : MonoBehaviour
 
         _buttons[index].RadioButtonPressed();
     }
+}
 }

@@ -2,9 +2,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
+
+namespace UISelectable {
 [RequireComponent(typeof(Button))]
-public class RadioButtonUtility : SelectableUtility<RadioButtonSettings, Button>, IPointerExitHandler
-{
+public class RadioButtonUtility : SelectableUtility<RadioButtonSettings, Button>, IPointerExitHandler {
     bool _pressed = false;
 
     protected override void OnEnable() {
@@ -38,8 +39,8 @@ public class RadioButtonUtility : SelectableUtility<RadioButtonSettings, Button>
 
         ChangeButtonNormalColor(_settings.ButtonPressedColor);
 
-        if (EventSystem.current.currentSelectedGameObject == gameObject) { 
-            return; 
+        if (EventSystem.current.currentSelectedGameObject == gameObject) {
+            return;
         }
         TweenTextColor(_settings.TextSelectedColor);
         TransformTween(_settings.TweenRotation, _settings.TweenScale);
@@ -50,8 +51,8 @@ public class RadioButtonUtility : SelectableUtility<RadioButtonSettings, Button>
 
         ChangeButtonNormalColor(_settings.ButtonDefaultColor);
 
-        if (EventSystem.current.currentSelectedGameObject == gameObject) { 
-            return; 
+        if (EventSystem.current.currentSelectedGameObject == gameObject) {
+            return;
         }
 
         TweenTextColor(_settings.TextNormalColor);
@@ -65,4 +66,5 @@ public class RadioButtonUtility : SelectableUtility<RadioButtonSettings, Button>
 
         _selectable.colors = block;
     }
+}
 }

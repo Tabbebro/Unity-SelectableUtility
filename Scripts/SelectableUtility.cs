@@ -5,13 +5,14 @@ using UnityEngine.EventSystems;
 using TMPro;
 using DG.Tweening;
 
+
+namespace UISelectable {
 public class SelectableUtility : SelectableUtility<SelectableSettings, Selectable> { }
 
-public abstract class SelectableUtility<TSettings, TSelectable> : MonoBehaviour, 
+public abstract class SelectableUtility<TSettings, TSelectable> : MonoBehaviour,
     IPointerEnterHandler, ISelectHandler, IDeselectHandler, IMoveHandler, ISubmitHandler
     where TSettings : SelectableSettings
-    where TSelectable : Selectable
-{
+    where TSelectable : Selectable {
 
     [Header("Settings")]
     [SerializeField] protected TSettings _settings;
@@ -99,7 +100,7 @@ public abstract class SelectableUtility<TSettings, TSelectable> : MonoBehaviour,
     #region Select Events
 
     public virtual void OnSelect(BaseEventData eventData) {
-        if (_selectable.interactable) { 
+        if (_selectable.interactable) {
             TweenTextColor(_settings.TextSelectedColor);
             TweenIconColor(_settings.TextSelectedColor);
 
@@ -124,14 +125,14 @@ public abstract class SelectableUtility<TSettings, TSelectable> : MonoBehaviour,
     #region Submit Event
 
     public void OnSubmit(BaseEventData eventData) {
-        
+
     }
 
     #endregion
 
     #region OnMoveEvent
     public virtual void OnMove(AxisEventData eventData) {
-        
+
     }
     #endregion
 
@@ -161,7 +162,7 @@ public abstract class SelectableUtility<TSettings, TSelectable> : MonoBehaviour,
 
     protected virtual void ResetTransformTweenValues() {
         if (_tweenableRect == null) { SetTweenableSelectable(); }
-        
+
         KillTransformTween();
 
         _tweenableRect.localRotation = Quaternion.Euler(Vector3.zero);
@@ -266,7 +267,7 @@ public abstract class SelectableUtility<TSettings, TSelectable> : MonoBehaviour,
         for (int i = 0; i < _slideIconLayoutElements.Count; i++) {
             LayoutElement layoutElement = _slideIconLayoutElements[i];
             CanvasGroup canvasGroup = _slideIconCanvasGroups[i];
-            
+
             float targetWidth = show ? _slideIconWidth : 0f;
             float targetAlpha = show ? 1f : 0f;
 
@@ -299,4 +300,5 @@ public abstract class SelectableUtility<TSettings, TSelectable> : MonoBehaviour,
     }
 
     #endregion
+}
 }

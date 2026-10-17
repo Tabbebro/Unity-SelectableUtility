@@ -1,9 +1,10 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+
+namespace UISelectable {
 [CreateAssetMenu(fileName = "UI Slider Settings", menuName = "UI/Interactable/Slider Settings")]
-public class SliderSettings : SelectableSettings
-{
+public class SliderSettings : SelectableSettings {
     [Header("Move Step")]
     public float StepAmount = 5f;
 
@@ -14,4 +15,5 @@ public class SliderSettings : SelectableSettings
     public float GetStep(Slider slider) {
         return (slider.maxValue - slider.minValue) * (StepAmount / 100);
     }
+}
 }

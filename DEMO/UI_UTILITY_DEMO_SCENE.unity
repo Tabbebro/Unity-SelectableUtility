@@ -1035,10 +1035,6 @@ MonoBehaviour:
   _slideIconWidth: 32
   _percentageText: {fileID: 812916954}
   _fill: {fileID: 125352494}
-  _repeatDelay: 0.4
-  _repeatRate: 0.05
-  _deadzone: 0.5
-  _heldDirection: 4
 --- !u!114 &539739867
 MonoBehaviour:
   m_ObjectHideFlags: 0
